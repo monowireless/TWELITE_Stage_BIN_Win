@@ -1,0 +1,7 @@
+TWELITE_Stage.exe が起動しない、起動時に異常終了のダイアログが出る場合は、
+vc_redist.x86.exe (Visual C++ ランタイムライブラリ) を更新してください。
+
+以下のサイトを開き「Visual Studio 2019 の Microsoft Visual C++ 再頒布可能
+パッケージ」(x86用) をダウンロード、インストールしてください。
+
+https://visualstudio.microsoft.com/ja/downloads/
