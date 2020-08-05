@@ -15,3 +15,8 @@ TWELITE STAGE 配布パッケージに含まれる TWELITE_Stage.exe の実行�
    - dll ディレクトリ
    - TWELITE_Stage ディレクトリ
 
+
+
+## 更新履歴
+
+[こちら](ReleaseNotes.md)を参照してください。
