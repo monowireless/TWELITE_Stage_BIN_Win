@@ -17,9 +17,7 @@ TWELITE STAGE 配布パッケージに含まれる TWELITE STAGE APP の改訂�
 
 * データの保存は sqlite3 を用い `{MW_STAGE Install}/log/{MW_STAGEファイル名}_WSns.sqlite` というファイルに格納されます。
 
-    * サンプルデータを `log/TWELITE_Stage_WSns.sqlite` に用意しています。
-
-* 画面繊維は [一覧(グラフプレビューあり)]>[ライブ]>[２４時間データ] が基本です。
+* 画面遷移は [一覧(グラフプレビューあり)]>[２４時間データ] >[ライブビュー]です。
 
     * [２４時間データ] から更に [年] [月] [日(グラフプレビューあり)] 選択画面に遷移できます。
 
@@ -44,7 +42,7 @@ TWELITE STAGE 配布パッケージに含まれる TWELITE STAGE APP の改訂�
 
 * データの抽出は https://sqlitebrowser.org/ のツールを使ってください。
 
-      
+  ​    
 
 ### センサーグラフモードの起動時に開く
 
@@ -69,18 +67,18 @@ TWELITE STAGE 配布パッケージに含まれる TWELITE STAGE APP の改訂�
 | lid         | INTEGER | ユーザにより割り当てられた LID などの識別値です。            |
 | lqi         | INTEGER | 受信強度の目安値です (Link Quality Indicator) 。             |
 | pkt_seq     | INTEGER | パケットの続き番号です。どのような値を取りうるのかはファームウェアによって異なります。 |
-| pkt_type    | INTEGER | 無線パケットの種別です。<br />`2 PAL AMB, 6 ARIA` <br />`1 PAL MAG` ※ 現時点では非対応<br />`3 PAL MOT,5 CUE` ※ 現時点では非対応<br />`0x101 App_Twelite, 0x103 App_IO` ※ 現時点では非対応 |
+| pkt_type    | INTEGER | 無線パケットの種別です。<br />`2 PAL AMB, 6 ARIA` <br />`1 PAL MAG` <br />`*3 PAL MOT,5 CUE` <br />`0x101 App_Twelite, *0x103 App_IO` <br />*現時点で非対応 |
 | value       | REAL    | 計測値 (パケット種別によって定義が異なります)<br />`pkt_type->`<br />` 2,6: 温度`<br />` 1: 磁石の判定有無 00->磁石なし, 01->N極, 02->S極`<br />` 3,5: X軸加速度(パケット中に複数サンプル含まれる場合は平均値)`[G]<br />` 0x101,103: 入力IOのビットマップ(val_dioの下位８ビットと同値)` |
 | value1      | REAL    | 計測値 (パケット種別によって定義が異なります)<br />`pkt_type->`<br />` 2,6: 湿度[%]`<br />` 1: 未使用`<br />` 3,5: Y軸加速度(パケット中に複数サンプル含まれる場合は平均値)[G]`<br />` 0x101: ADC1[V] ,103: 未使用` |
 | value2      | REAL    | 計測値 (パケット種別によって定義が異なります)<br />`pkt_type->`<br />` 2: 照度[lx], 6: 未使用`<br />` 1: 未使用`<br />` 3,5: Z軸加速度(パケット中に複数サンプル含まれる場合は平均値)`[G]<br />` 0x101: ADC2[V], 103: 未使用` |
 | value3      | REAL    | 計測値 (パケット種別によって定義が異なります)<br />`pkt_type->`<br />` 2: 未使用, 6: 未使用`<br />` 1: 未使用`<br />` 3,5: 未使用`<br />` 0x101: ADC3[V], 103: 未使用` |
 | val_vcc_mv  | INTEGER | 電圧[mV]                                                     |
-| val_dio     | INTEGER | b0..b7: DI1..DI8の値 (1はLO, 0はHIGHレベル)<br />b24..b25: マグネット値 (b28が1の場合), 00->磁石なし, 01->N極, 02->S極<br />b28: 1の場合マグネットデータがb24..b25に格納される<br />b31: 定期送信ビット(マグネットのみ) |
+| val_dio     | INTEGER | b0..b7: DI1..DI8の値 (1はLO, 0はHIGHレベル)<br />b24..b25: マグネット値 (b28が1の場合), 00->磁石なし, 01->N極, 10->S極<br />b28: 1の場合マグネットデータがb24..b25に格納される<br />b31: 定期送信ビット(マグネットのみ) |
 | val_adc1_mv | INTEGER | pkt_type->1,2,3,0x101: ADC1の計測値                          |
 | val_adc2_mv | INTEGER | pkt_type->0x101: ADC4の計測値                                |
 | val_aux     | INTEGER | その他データ格納目的                                         |
 | ev_src      | INTEGER | イベント発生元                                               |
-| ev_id       | INTEGER | イベントID                                                   |
+| ev_id       | INTEGER | イベントID<br />pal_type->5: 1...6→サイコロ 16→MOVE ... 他(TWELITE CUE の資料参照) |
 | ev_param    | INTEGER | イベントパラメータ                                           |
 |             |         |                                                              |
 
